@@ -50,32 +50,32 @@ A **high-performance, low-latency** Java-based system that analyzes conversation
 ```mermaid
 graph TB
     %% External Inputs
-    User[👤 User] --> |Message| LLM[🤖 LLM Platform<br/>(Grok, ChatGPT, etc.)]
+    User[👤 User] --> |Message| LLM[🤖 LLM Platform]
     LLM --> |Forward Message| Engine[🚀 ConversationalAdRelevanceEngine]
     
     %% Main Engine Components
-    Engine --> Cache[💾 Intelligent Cache<br/>TTL: 30s, LRU Eviction]
-    Engine --> ContextMgr[📝 ConversationManager<br/>Thread-safe Storage]
-    Engine --> ContextAnalyzer[🔍 ContextAnalyzer<br/>Intent & Mood Detection]
-    Engine --> AdMatcher[🎯 AdMatchingEngine<br/>Relevance Scoring]
-    Engine --> ResponseGen[💬 ConversationalResponseGenerator<br/>Natural Responses]
+    Engine --> Cache[💾 Intelligent Cache]
+    Engine --> ContextMgr[📝 ConversationManager]
+    Engine --> ContextAnalyzer[🔍 ContextAnalyzer]
+    Engine --> AdMatcher[🎯 AdMatchingEngine]
+    Engine --> ResponseGen[💬 ResponseGenerator]
     
     %% Data Flow
-    ContextMgr --> |Get/Update| Context[📊 ConversationContext<br/>Messages, Mood, Intents]
-    ContextMgr --> |Get/Update| UserState[👤 UserState<br/>Preferences, History]
+    ContextMgr --> |Get/Update| Context[📊 ConversationContext]
+    ContextMgr --> |Get/Update| UserState[👤 UserState]
     
     ContextAnalyzer --> |Analyze| Context
     ContextAnalyzer --> |Update| Context
     
-    AdMatcher --> |Query| AdInventory[📦 Ad Inventory<br/>Targeted Ads]
+    AdMatcher --> |Query| AdInventory[📦 Ad Inventory]
     AdMatcher --> |Score| Context
     AdMatcher --> |Score| UserState
     
-    ResponseGen --> |Generate| AdSuggestion[💡 AdSuggestion<br/>Ad + Response]
+    ResponseGen --> |Generate| AdSuggestion[💡 AdSuggestion]
     
     %% Performance Components
-    Engine --> ThreadPool[⚡ Thread Pool<br/>Async Processing]
-    Engine --> Metrics[📈 Performance Metrics<br/>Latency Tracking]
+    Engine --> ThreadPool[⚡ Thread Pool]
+    Engine --> Metrics[📈 Performance Metrics]
     
     %% Output
     AdSuggestion --> |Return| Engine
