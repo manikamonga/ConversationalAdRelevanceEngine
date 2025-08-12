@@ -463,12 +463,85 @@ public class ChatGPTService {
                 ad.addCategory(adNode.path("category").asText());
                 ad.setCallToAction(adNode.path("call_to_action").asText());
                 
-                // Create conversational template with clickable link
+                // Create conversational template with sponsored banner
                 String url = adNode.path("url").asText();
                 String callToAction = adNode.path("call_to_action").asText();
+                String title = adNode.path("title").asText();
+                String description = adNode.path("description").asText();
                 
-                String template = String.format("%s <a href='%s' target='_blank'>%s</a>", 
-                    conversationalResponse, url, callToAction);
+                String sponsoredBanner = String.format("""
+                    <div class="sponsored-banner" style="
+                        background: linear-gradient(135deg, #667eea 0%%, #764ba2 100%%);
+                        border: 1px solid #e2e8f0;
+                        border-radius: 12px;
+                        padding: 16px;
+                        margin: 12px 0;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        position: relative;
+                        overflow: hidden;
+                    ">
+                        <div style="
+                            position: absolute;
+                            top: 8px;
+                            right: 8px;
+                            background: rgba(255, 255, 255, 0.2);
+                            color: white;
+                            padding: 2px 8px;
+                            border-radius: 12px;
+                            font-size: 10px;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                        ">Sponsored</div>
+                        
+                        <div style="
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            margin-bottom: 8px;
+                        ">
+                            <div style="
+                                width: 40px;
+                                height: 40px;
+                                background: rgba(255, 255, 255, 0.2);
+                                border-radius: 8px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 18px;
+                            ">💡</div>
+                            <div>
+                                <h4 style="
+                                    margin: 0 0 4px 0;
+                                    color: white;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                ">%s</h4>
+                                <p style="
+                                    margin: 0;
+                                    color: rgba(255, 255, 255, 0.9);
+                                    font-size: 14px;
+                                    line-height: 1.4;
+                                ">%s</p>
+                            </div>
+                        </div>
+                        
+                        <a href="%s" target="_blank" style="
+                            display: inline-block;
+                            background: rgba(255, 255, 255, 0.2);
+                            color: white;
+                            padding: 8px 16px;
+                            border-radius: 6px;
+                            text-decoration: none;
+                            font-weight: 600;
+                            font-size: 14px;
+                            transition: all 0.2s;
+                            border: 1px solid rgba(255, 255, 255, 0.3);
+                        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">%s</a>
+                    </div>
+                    """, title, description, url, callToAction);
+                
+                String template = String.format("%s %s", conversationalResponse, sponsoredBanner);
                 ad.setConversationalTemplate(template);
             } else {
                 // No ad, but still provide conversational response

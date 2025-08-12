@@ -2849,3 +2849,585 @@ Caused by: com.fasterxml.jackson.core.JsonParseException: Unexpected character (
 }
 
 2025-08-12 16:00:08.160 [pool-2-thread-4] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039606480_kowpmhhh6: Book Your Stay in Paris with Us! (score: 0.9) in 1644ms
+2025-08-12 16:03:17.680 [http-nio-8080-exec-2] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039797625_lg4ps5pi8: hi
+2025-08-12 16:03:17.688 [pool-2-thread-5] INFO  c.a.engine.ConversationManager - Created new user state: user_59fo3azm7
+2025-08-12 16:03:17.697 [ForkJoinPool.commonPool-worker-8] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:03:18.342 [ForkJoinPool.commonPool-worker-8] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sJRYASHSKRtLkU7rpvwfalOXCo1",
+  "object": "chat.completion",
+  "created": 1755039797,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"conversation\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"Hello! How can I assist you today?\"\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 414,
+    "completion_tokens": 43,
+    "total_tokens": 457,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:03:18.345 [pool-2-thread-5] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039797625_lg4ps5pi8: Conversational Response (score: 0.9) in 658ms
+2025-08-12 16:04:50.623 [http-nio-8080-exec-5] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039890565_nyo53eny5: hi
+2025-08-12 16:04:50.629 [pool-2-thread-6] INFO  c.a.engine.ConversationManager - Created new user state: user_5va1amyge
+2025-08-12 16:04:50.631 [ForkJoinPool.commonPool-worker-9] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:04:52.420 [ForkJoinPool.commonPool-worker-9] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sKxVlrqKiF2NwXD5izrf8UlzcrN",
+  "object": "chat.completion",
+  "created": 1755039891,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"conversation\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"Hello! How are you doing today? Is there anything specific you'd like to talk about or do you need any help with something?\",\n    \"ad_suggestion\": null\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 414,
+    "completion_tokens": 69,
+    "total_tokens": 483,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:04:52.432 [pool-2-thread-6] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039890565_nyo53eny5:  (score: 0.9) in 1804ms
+2025-08-12 16:05:08.850 [http-nio-8080-exec-8] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039908836_l7z58geqb: I need a rec for a hotel in Milan
+2025-08-12 16:05:08.852 [ForkJoinPool.commonPool-worker-9] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:05:10.488 [ForkJoinPool.commonPool-worker-9] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sLFYSIehUpkip9GbUpkSDVOXi6C",
+  "object": "chat.completion",
+  "created": 1755039909,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"travel\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"I'd be happy to help you find a hotel in Milan! What specific requirements or preferences do you have for your stay?\",\n    \"ad_suggestion\": {\n        \"title\": \"Explore Milan with Ease!\",\n        \"description\": \"Discover the best hotels in Milan for a comfortable stay. Book now and enjoy your trip!\",\n        \"category\": \"travel\",\n        \"call_to_action\": \"Book Now\",\n        \"url\": \"https://example.com/milan-hotels\",\n        \"relevance_reasoning\": \"Since you're looking for a hotel in Milan, this ad can help you find the perfect accommodation for your trip.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 430,
+    "completion_tokens": 163,
+    "total_tokens": 593,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:05:10.493 [pool-2-thread-7] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039908836_l7z58geqb: Explore Milan with Ease! (score: 0.9) in 1640ms
+2025-08-12 16:05:17.923 [http-nio-8080-exec-1] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039917875_m12r6r55t: what about in paris
+2025-08-12 16:05:17.924 [ForkJoinPool.commonPool-worker-9] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:05:19.180 [ForkJoinPool.commonPool-worker-9] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sLOPjqWdJOyVZ6XmrrKP4g5S0MG",
+  "object": "chat.completion",
+  "created": 1755039918,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"travel\",\n    \"mood\": \"curious\",\n    \"confidence\": 0.85,\n    \"conversational_response\": \"Paris is such a vibrant city with so much to offer! From the iconic Eiffel Tower to delicious cafes and charming streets, there's always something exciting to explore. If you're planning a trip, I can help you with recommendations or tips. Is there a specific area or activity you're interested in?\"\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 420,
+    "completion_tokens": 97,
+    "total_tokens": 517,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:05:19.193 [pool-2-thread-8] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039917875_m12r6r55t: Conversational Response (score: 0.85) in 1269ms
+2025-08-12 16:05:33.977 [http-nio-8080-exec-4] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039933945_j3mnfral0: I need a hotel in Paris
+2025-08-12 16:05:33.979 [ForkJoinPool.commonPool-worker-9] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:05:34.669 [ForkJoinPool.commonPool-worker-9] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sLefYV9NETsq9OO3KaCxnPshooZ",
+  "object": "chat.completion",
+  "created": 1755039934,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"travel\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"I can help you find a hotel in Paris! What are your preferences, like budget or specific location? Feel free to let me know so I can assist you better.\"\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 424,
+    "completion_tokens": 68,
+    "total_tokens": 492,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:05:34.671 [pool-2-thread-9] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039933945_j3mnfral0: Conversational Response (score: 0.9) in 692ms
+2025-08-12 16:05:51.091 [http-nio-8080-exec-7] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755039951073_v1xh9kq4k: in the 300$ range
+2025-08-12 16:05:51.093 [ForkJoinPool.commonPool-worker-9] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:05:53.704 [ForkJoinPool.commonPool-worker-9] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sLvb666HTPfKa5EGB4oFt0TJfw8",
+  "object": "chat.completion",
+  "created": 1755039951,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"shopping\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"It sounds like you're looking for something in the $300 range. What type of product or service are you interested in?\",\n    \"ad_suggestion\": {\n        \"title\": \"Tech Deals Under $300\",\n        \"description\": \"Explore our selection of tech gadgets and accessories priced under $300.\",\n        \"category\": \"technology\",\n        \"call_to_action\": \"Shop Now\",\n        \"url\": \"https://example.com/tech-deals-under-300\",\n        \"relevance_reasoning\": \"Since you mentioned the $300 range, you might be interested in affordable tech options.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 424,
+    "completion_tokens": 155,
+    "total_tokens": 579,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:05:53.711 [pool-2-thread-10] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755039951073_v1xh9kq4k: Tech Deals Under $300 (score: 0.9) in 2618ms
+2025-08-12 16:07:48.197 [http-nio-8080-exec-10] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755040068153_bsz4073bh: I need a bag
+2025-08-12 16:07:48.202 [ForkJoinPool.commonPool-worker-10] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:07:49.751 [ForkJoinPool.commonPool-worker-10] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sNomWP57lonwxlcBX0zzSs61BPg",
+  "object": "chat.completion",
+  "created": 1755040068,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"shopping\",\n    \"mood\": \"neutral\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"Sure, finding the right bag can be exciting! Are you looking for a specific type of bag or just browsing around?\",\n    \"ad_suggestion\": {\n        \"title\": \"Stylish Backpacks for Every Occasion\",\n        \"description\": \"Explore our collection of trendy and functional backpacks for your everyday needs. From sleek designs to spacious compartments, we have it all!\",\n        \"category\": \"fashion\",\n        \"call_to_action\": \"Shop Now\",\n        \"url\": \"https://example.com/backpacks\",\n        \"relevance_reasoning\": \"Since you mentioned needing a bag, I thought you might be interested in checking out our stylish backpacks.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 420,
+    "completion_tokens": 173,
+    "total_tokens": 593,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:07:49.762 [pool-2-thread-1] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755040068153_bsz4073bh: Stylish Backpacks for Every Occasion (score: 0.9) in 1562ms
+2025-08-12 16:08:27.811 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Starting ChatGPTAdRelevanceAPI using Java 24.0.2 with PID 76292 (/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/target/classes started by manikamonga in /Users/manikamonga/Desktop/ConversationalAdRelevanceEngine)
+2025-08-12 16:08:27.815 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] DEBUG c.a.api.ChatGPTAdRelevanceAPI - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-08-12 16:08:27.816 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - No active profile set, falling back to 1 default profile: "default"
+2025-08-12 16:08:29.738 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.engine.AdMatchingEngine - Initialized ad inventory with 6 ads
+2025-08-12 16:08:30.154 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Started ChatGPTAdRelevanceAPI in 2.862 seconds (process running for 7.844)
+2025-08-12 16:08:30.157 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - 🚀 ChatGPT-Enhanced Ad Relevance API started on port 8080
+2025-08-12 16:09:02.405 [http-nio-8080-exec-1] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation test_sponsored_banner: I need a new dress for a party
+2025-08-12 16:09:02.409 [pool-2-thread-1] INFO  c.a.engine.ConversationManager - Created new user state: test_user
+2025-08-12 16:09:02.413 [ForkJoinPool.commonPool-worker-7] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:09:02.948 [ForkJoinPool.commonPool-worker-7] ERROR com.adrelevance.llm.ChatGPTService - ChatGPT API call failed: 401  - Response: {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+2025-08-12 16:09:02.956 [ForkJoinPool.commonPool-worker-7] ERROR com.adrelevance.llm.ChatGPTService - Error analyzing context with ChatGPT for conversation test_sponsored_banner: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+java.io.IOException: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+	at com.adrelevance.llm.ChatGPTService.callChatGPTAPI(ChatGPTService.java:189)
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:66)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1814)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+2025-08-12 16:09:02.959 [pool-2-thread-1] ERROR c.a.e.ChatGPTEnhancedAdRelevanceEngine - Error processing message with ChatGPT for conversation test_sponsored_banner: java.lang.RuntimeException: ChatGPT API unavailable: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+java.util.concurrent.CompletionException: java.lang.RuntimeException: ChatGPT API unavailable: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+	at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(CompletableFuture.java:325)
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:361)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:366)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1816)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+Caused by: java.lang.RuntimeException: ChatGPT API unavailable: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:74)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1814)
+	... 5 common frames omitted
+Caused by: java.io.IOException: ChatGPT API call failed: 401  - {
+    "error": {
+        "message": "Incorrect API key provided: your-ope************here. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+	at com.adrelevance.llm.ChatGPTService.callChatGPTAPI(ChatGPTService.java:189)
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:66)
+	... 6 common frames omitted
+2025-08-12 16:09:30.594 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Starting ChatGPTAdRelevanceAPI using Java 24.0.2 with PID 76877 (/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/target/classes started by manikamonga in /Users/manikamonga/Desktop/ConversationalAdRelevanceEngine)
+2025-08-12 16:09:30.597 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] DEBUG c.a.api.ChatGPTAdRelevanceAPI - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-08-12 16:09:30.598 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - No active profile set, falling back to 1 default profile: "default"
+2025-08-12 16:09:32.654 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.engine.AdMatchingEngine - Initialized ad inventory with 6 ads
+2025-08-12 16:09:33.086 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Started ChatGPTAdRelevanceAPI in 3.008 seconds (process running for 8.379)
+2025-08-12 16:09:33.089 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - 🚀 ChatGPT-Enhanced Ad Relevance API started on port 8080
+2025-08-12 16:09:41.220 [http-nio-8080-exec-1] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation test_sponsored_banner: I need a new dress for a party
+2025-08-12 16:09:41.223 [pool-2-thread-1] INFO  c.a.engine.ConversationManager - Created new user state: test_user
+2025-08-12 16:09:41.228 [ForkJoinPool.commonPool-worker-6] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:09:43.066 [ForkJoinPool.commonPool-worker-6] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sPd65Ja0IM5TrzIbcjse7Xh9gt9",
+  "object": "chat.completion",
+  "created": 1755040181,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"fashion\",\n    \"mood\": \"excited\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"How exciting! Finding the perfect dress for a party can be so much fun. Do you have a specific style or color in mind?\",\n    \"ad_suggestion\": {\n        \"title\": \"Stunning Party Dresses\",\n        \"description\": \"Discover a collection of elegant and trendy party dresses for any occasion.\",\n        \"category\": \"fashion\",\n        \"call_to_action\": \"Shop Now\",\n        \"url\": \"https://example.com/party-dresses\",\n        \"relevance_reasoning\": \"Since you mentioned needing a new dress for a party, I thought you might be interested in exploring some stunning party dress options.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 428,
+    "completion_tokens": 165,
+    "total_tokens": 593,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:09:43.075 [ForkJoinPool.commonPool-worker-6] ERROR com.adrelevance.llm.ChatGPTService - Error parsing ChatGPT response: Conversion = b, Flags = #
+java.util.FormatFlagsConversionMismatchException: Conversion = b, Flags = #
+	at java.base/java.util.Formatter$FormatSpecifier.failMismatch(Formatter.java:4658)
+	at java.base/java.util.Formatter$FormatSpecifier.checkGeneral(Formatter.java:3365)
+	at java.base/java.util.Formatter$FormatSpecifier.check(Formatter.java:3133)
+	at java.base/java.util.Formatter$FormatSpecifier.<init>(Formatter.java:3126)
+	at java.base/java.util.Formatter$FormatSpecifierParser.parse(Formatter.java:2915)
+	at java.base/java.util.Formatter.parse(Formatter.java:2814)
+	at java.base/java.util.Formatter.format(Formatter.java:2744)
+	at java.base/java.util.Formatter.format(Formatter.java:2698)
+	at java.base/java.lang.String.format(String.java:4468)
+	at com.adrelevance.llm.ChatGPTService.parseChatGPTResponse(ChatGPTService.java:472)
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:69)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1814)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+2025-08-12 16:09:43.080 [ForkJoinPool.commonPool-worker-6] ERROR com.adrelevance.llm.ChatGPTService - Error analyzing context with ChatGPT for conversation test_sponsored_banner: Failed to parse ChatGPT response: Conversion = b, Flags = #
+java.lang.RuntimeException: Failed to parse ChatGPT response: Conversion = b, Flags = #
+	at com.adrelevance.llm.ChatGPTService.parseChatGPTResponse(ChatGPTService.java:563)
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:69)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1814)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+Caused by: java.util.FormatFlagsConversionMismatchException: Conversion = b, Flags = #
+	at java.base/java.util.Formatter$FormatSpecifier.failMismatch(Formatter.java:4658)
+	at java.base/java.util.Formatter$FormatSpecifier.checkGeneral(Formatter.java:3365)
+	at java.base/java.util.Formatter$FormatSpecifier.check(Formatter.java:3133)
+	at java.base/java.util.Formatter$FormatSpecifier.<init>(Formatter.java:3126)
+	at java.base/java.util.Formatter$FormatSpecifierParser.parse(Formatter.java:2915)
+	at java.base/java.util.Formatter.parse(Formatter.java:2814)
+	at java.base/java.util.Formatter.format(Formatter.java:2744)
+	at java.base/java.util.Formatter.format(Formatter.java:2698)
+	at java.base/java.lang.String.format(String.java:4468)
+	at com.adrelevance.llm.ChatGPTService.parseChatGPTResponse(ChatGPTService.java:472)
+	... 7 common frames omitted
+2025-08-12 16:09:43.081 [pool-2-thread-1] ERROR c.a.e.ChatGPTEnhancedAdRelevanceEngine - Error processing message with ChatGPT for conversation test_sponsored_banner: java.lang.RuntimeException: ChatGPT API unavailable: Failed to parse ChatGPT response: Conversion = b, Flags = #
+java.util.concurrent.CompletionException: java.lang.RuntimeException: ChatGPT API unavailable: Failed to parse ChatGPT response: Conversion = b, Flags = #
+	at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(CompletableFuture.java:325)
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:361)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:366)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1816)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:507)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1394)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1970)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:187)
+Caused by: java.lang.RuntimeException: ChatGPT API unavailable: Failed to parse ChatGPT response: Conversion = b, Flags = #
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:74)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1814)
+	... 5 common frames omitted
+Caused by: java.lang.RuntimeException: Failed to parse ChatGPT response: Conversion = b, Flags = #
+	at com.adrelevance.llm.ChatGPTService.parseChatGPTResponse(ChatGPTService.java:563)
+	at com.adrelevance.llm.ChatGPTService.lambda$analyzeContextAndSuggestAd$0(ChatGPTService.java:69)
+	... 6 common frames omitted
+Caused by: java.util.FormatFlagsConversionMismatchException: Conversion = b, Flags = #
+	at java.base/java.util.Formatter$FormatSpecifier.failMismatch(Formatter.java:4658)
+	at java.base/java.util.Formatter$FormatSpecifier.checkGeneral(Formatter.java:3365)
+	at java.base/java.util.Formatter$FormatSpecifier.check(Formatter.java:3133)
+	at java.base/java.util.Formatter$FormatSpecifier.<init>(Formatter.java:3126)
+	at java.base/java.util.Formatter$FormatSpecifierParser.parse(Formatter.java:2915)
+	at java.base/java.util.Formatter.parse(Formatter.java:2814)
+	at java.base/java.util.Formatter.format(Formatter.java:2744)
+	at java.base/java.util.Formatter.format(Formatter.java:2698)
+	at java.base/java.lang.String.format(String.java:4468)
+	at com.adrelevance.llm.ChatGPTService.parseChatGPTResponse(ChatGPTService.java:472)
+	... 7 common frames omitted
+2025-08-12 16:10:37.346 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Starting ChatGPTAdRelevanceAPI using Java 24.0.2 with PID 77579 (/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/target/classes started by manikamonga in /Users/manikamonga/Desktop/ConversationalAdRelevanceEngine)
+2025-08-12 16:10:37.348 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] DEBUG c.a.api.ChatGPTAdRelevanceAPI - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-08-12 16:10:37.349 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - No active profile set, falling back to 1 default profile: "default"
+2025-08-12 16:10:39.303 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.engine.AdMatchingEngine - Initialized ad inventory with 6 ads
+2025-08-12 16:10:39.730 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - Started ChatGPTAdRelevanceAPI in 2.886 seconds (process running for 8.165)
+2025-08-12 16:10:39.732 [com.adrelevance.api.ChatGPTAdRelevanceAPI.main()] INFO  c.a.api.ChatGPTAdRelevanceAPI - 🚀 ChatGPT-Enhanced Ad Relevance API started on port 8080
+2025-08-12 16:10:54.042 [http-nio-8080-exec-1] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation test_sponsored_banner_fixed: I need a new dress for a party
+2025-08-12 16:10:54.045 [pool-2-thread-1] INFO  c.a.engine.ConversationManager - Created new user state: test_user
+2025-08-12 16:10:54.055 [ForkJoinPool.commonPool-worker-7] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:10:58.354 [ForkJoinPool.commonPool-worker-7] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sQpwPlMTCfprEmw8jxPrpxV99UL",
+  "object": "chat.completion",
+  "created": 1755040255,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"shopping\",\n    \"mood\": \"excited\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"That sounds fun! Finding the perfect dress for a party can be exciting. Do you have a specific style or color in mind?\",\n    \"ad_suggestion\": {\n        \"title\": \"Stylish Party Dresses Collection\",\n        \"description\": \"Explore our latest collection of trendy party dresses for every occasion. Find the perfect dress to make a statement!\",\n        \"category\": \"fashion\",\n        \"call_to_action\": \"Shop Now\",\n        \"url\": \"https://example.com/partydresses\",\n        \"relevance_reasoning\": \"Since you mentioned needing a new dress for a party, this ad suggestion might help you discover the perfect outfit.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 428,
+    "completion_tokens": 170,
+    "total_tokens": 598,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:10:58.380 [pool-2-thread-1] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation test_sponsored_banner_fixed: Stylish Party Dresses Collection (score: 0.9) in 4336ms
+2025-08-12 16:11:14.328 [http-nio-8080-exec-3] INFO  c.a.api.ChatGPTAdRelevanceAPI - Processing message with ChatGPT for conversation conv_1755040274284_4jqlb2s02: I need a new dress for a party
+2025-08-12 16:11:14.332 [ForkJoinPool.commonPool-worker-7] INFO  com.adrelevance.llm.ChatGPTService - Attempting ChatGPT API call
+2025-08-12 16:11:15.929 [ForkJoinPool.commonPool-worker-7] DEBUG com.adrelevance.llm.ChatGPTService - ChatGPT API response: {
+  "id": "chatcmpl-C3sR80WIkQEwEFRxobEfv7DB0Vksv",
+  "object": "chat.completion",
+  "created": 1755040274,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n    \"intent\": \"fashion\",\n    \"mood\": \"excited\",\n    \"confidence\": 0.9,\n    \"conversational_response\": \"That sounds like a fun event! Finding the perfect dress can really make the night special. Do you have a specific style or color in mind?\",\n    \"ad_suggestion\": {\n        \"title\": \"Get Ready for the Party!\",\n        \"description\": \"Explore our latest collection of party dresses to stand out at any event. From elegant to trendy, we have something for every style.\",\n        \"category\": \"fashion\",\n        \"call_to_action\": \"Shop Now\",\n        \"url\": \"https://example.com/party-dresses\",\n        \"relevance_reasoning\": \"Since you mentioned needing a dress for a party, this ad suggestion could help you find the perfect outfit for the occasion.\"\n    }\n}",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 428,
+    "completion_tokens": 180,
+    "total_tokens": 608,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}
+
+2025-08-12 16:11:15.936 [pool-2-thread-2] INFO  c.a.e.ChatGPTEnhancedAdRelevanceEngine - Generated ChatGPT-powered ad suggestion for conversation conv_1755040274284_4jqlb2s02: Get Ready for the Party! (score: 0.9) in 1606ms
