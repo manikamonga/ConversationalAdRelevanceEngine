@@ -1,0 +1,17 @@
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/ConversationAnalytics.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/engine/ConversationManager.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/EngineStats.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/UserMood.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/MessageType.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/ConversationContext.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/demo/ConversationalAdDemo.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/engine/ConversationalAdRelevanceEngine.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/Message.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/UserState.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/ConversationMood.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/engine/ConversationalResponseGenerator.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/AdType.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/engine/AdMatchingEngine.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/AdSuggestion.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/model/Ad.java
+/Users/manikamonga/Desktop/ConversationalAdRelevanceEngine/src/main/java/com/adrelevance/engine/ContextAnalyzer.java

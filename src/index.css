@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .chat-message {
+    @apply animate-slide-up;
+  }
+  
+  .message-bubble {
+    @apply rounded-2xl px-4 py-3 max-w-xs md:max-w-md lg:max-w-lg;
+  }
+  
+  .user-message {
+    @apply bg-primary-500 text-white ml-auto;
+  }
+  
+  .bot-message {
+    @apply bg-white text-gray-800 shadow-lg;
+  }
+  
+  .ad-suggestion {
+    @apply bg-gradient-to-r from-secondary-500 to-secondary-600 text-white border-l-4 border-secondary-400;
+  }
+  
+  .typing-indicator {
+    @apply flex space-x-1 p-3;
+  }
+  
+  .typing-dot {
+    @apply w-2 h-2 bg-gray-400 rounded-full animate-pulse;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:outline-none transition-colors;
+  }
+  
+  .send-button {
+    @apply bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-xl transition-colors duration-200 flex items-center space-x-2;
+  }
+  
+  .stats-card {
+    @apply bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20;
+  }
+  
+  .performance-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .performance-excellent {
+    @apply bg-success-100 text-success-800;
+  }
+  
+  .performance-good {
+    @apply bg-warning-100 text-warning-800;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
