@@ -103,6 +103,25 @@
             border-left: 4px solid #4ade80;
         }
 
+        .message.ad-suggestion a {
+            display: inline-block;
+            background: #4ade80;
+            color: #1f2937;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.ad-suggestion a:hover {
+            background: #22c55e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
         .chat-input {
             display: flex;
             gap: 10px;
@@ -333,43 +352,7 @@
                 </div>
             </div>
 
-            <div class="demo-section">
-                <h2>Integration Features</h2>
-                <div class="features">
-                    <div class="feature-card">
-                        <div class="emoji">🎯</div>
-                        <h3>Context-Aware Matching</h3>
-                        <p>Analyzes conversation context to suggest highly relevant ads based on user interests and conversation topics.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="emoji">⚡</div>
-                        <h3>Low Latency</h3>
-                        <p>Optimized for real-time processing with caching and async operations to ensure fast response times.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="emoji">🔒</div>
-                        <h3>Privacy-First</h3>
-                        <p>User data is processed locally with no personal information stored. Users can opt out of ad suggestions.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="emoji">🎨</div>
-                        <h3>Seamless Integration</h3>
-                        <p>Easy to integrate with OpenWebUI or any other chat interface with minimal configuration required.</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="demo-section">
-                <h2>Quick Integration</h2>
-                <p>To integrate with your OpenWebUI instance, simply include the client library:</p>
-                <div class="code-block">
-&lt;script src="http://localhost:3001/client.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-    // Auto-initializes and integrates with OpenWebUI
-    window.adRelevanceClient.integrateWithOpenWebUI();
-&lt;/script&gt;
-                </div>
-            </div>
         </div>
     </div>
 
@@ -381,23 +364,22 @@
         // Initialize the client
         function initClient() {
             client = new AdRelevanceClient({
-                baseURL: 'http://localhost:3001',
-                wsURL: 'ws://localhost:3002'
-            });
-
-            // Set up event listeners
-            client.on('ad-suggestion', (data) => {
-                addMessage(data.adSuggestion, 'ad-suggestion');
+                baseURL: 'http://localhost:3001'
             });
         }
 
         // Connect to the integration server
         async function connect() {
             try {
-                await client.connect();
-                updateStatus(true);
-                startStatsPolling();
-                console.log('Connected to Ad Relevance Integration');
+                // Test the connection with a health check
+                const health = await client.healthCheck();
+                if (health) {
+                    updateStatus(true);
+                    startStatsPolling();
+                    console.log('Connected to Ad Relevance Integration');
+                } else {
+                    updateStatus(false);
+                }
             } catch (error) {
                 console.error('Failed to connect:', error);
                 updateStatus(false);
@@ -406,7 +388,6 @@
 
         // Disconnect from the integration server
         function disconnect() {
-            client.disconnect();
             updateStatus(false);
             stopStatsPolling();
             console.log('Disconnected from Ad Relevance Integration');
@@ -462,7 +443,14 @@
             const messagesContainer = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
-            messageDiv.textContent = content;
+            
+            // Use innerHTML for ad suggestions to render HTML links properly
+            if (type === 'ad-suggestion') {
+                messageDiv.innerHTML = content;
+            } else {
+                messageDiv.textContent = content;
+            }
+            
             messagesContainer.appendChild(messageDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }

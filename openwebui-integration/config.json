@@ -2,7 +2,7 @@
   "adEngine": {
     "host": "localhost",
     "port": 8080,
-    "endpoint": "/api/process-message",
+    "endpoint": "/api/chatgpt/process-message",
     "timeout": 5000
   },
   "openwebui": {
@@ -19,7 +19,7 @@
   },
   "adSettings": {
     "enabled": true,
-    "minRelevanceScore": 0.3,
+    "minRelevanceScore": 0.1,
     "maxAdsPerResponse": 1,
     "responseTemplate": "💡 {adResponse}",
     "enableAnalytics": true,

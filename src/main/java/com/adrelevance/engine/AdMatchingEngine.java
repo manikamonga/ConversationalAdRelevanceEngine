@@ -39,7 +39,7 @@ public class AdMatchingEngine {
                     ad.setRelevanceScore(score);
                     return ad;
                 })
-                .filter(ad -> ad.getRelevanceScore() > 0.3) // Minimum relevance threshold
+                .filter(ad -> ad.getRelevanceScore() > 0.1) // Minimum relevance threshold (temporarily lowered)
                 .sorted((a1, a2) -> Double.compare(a2.getRelevanceScore(), a1.getRelevanceScore()))
                 .limit(maxResults)
                 .collect(Collectors.toList());
@@ -61,6 +61,9 @@ public class AdMatchingEngine {
                           (moodScore * moodWeight) +
                           (intentScore * intentWeight) +
                           (userPreferenceScore * userPreferenceWeight);
+
+        logger.debug("Ad '{}' relevance scores - Topic: {}, Mood: {}, Intent: {}, UserPref: {}, Total: {}", 
+                   ad.getId(), topicScore, moodScore, intentScore, userPreferenceScore, totalScore);
 
         return Math.min(1.0, totalScore);
     }
@@ -108,6 +111,10 @@ public class AdMatchingEngine {
                 ad.getKeywords().contains(intent) ||
                 ad.getTargetAudience().contains(intent)) {
                 maxScore = Math.max(maxScore, 0.8);
+                logger.debug("Intent '{}' matched ad '{}' with score 0.8", intent, ad.getId());
+            } else {
+                logger.debug("Intent '{}' did not match ad '{}' (categories: {}, keywords: {})", 
+                           intent, ad.getId(), ad.getCategories(), ad.getKeywords());
             }
         }
 
@@ -148,10 +155,17 @@ public class AdMatchingEngine {
         fashionAd.addCategory("fashion");
         fashionAd.addKeyword("style");
         fashionAd.addKeyword("trendy");
+        fashionAd.addKeyword("fashion");
+        fashionAd.addKeyword("clothes");
+        fashionAd.addKeyword("outfit");
+        fashionAd.addKeyword("dress");
+        fashionAd.addKeyword("shoes");
+        fashionAd.addKeyword("bag");
+        fashionAd.addKeyword("accessories");
         fashionAd.setTopicRelevance("fashion", 0.9);
         fashionAd.setMoodRelevance(UserMood.HAPPY, 0.8);
         fashionAd.setMoodRelevance(UserMood.EXCITED, 0.7);
-        fashionAd.setConversationalTemplate("Hey! I noticed you're into style. Our new summer collection is absolutely stunning! 🌸");
+        fashionAd.setConversationalTemplate("Hey! I noticed you're into style. Our new summer collection is absolutely stunning! 🌸 <a href='https://fashionbrand.com/summer-collection' target='_blank'>Shop Now</a>");
         fashionAd.setType(AdType.PRODUCT_PROMOTION);
         adInventory.add(fashionAd);
 
@@ -161,12 +175,17 @@ public class AdMatchingEngine {
         techAd.addCategory("electronics");
         techAd.addCategory("technology");
         techAd.addKeyword("smartphone");
+        techAd.addKeyword("phone");
+        techAd.addKeyword("mobile");
+        techAd.addKeyword("tech");
+        techAd.addKeyword("technology");
         techAd.addKeyword("innovation");
+        techAd.addKeyword("device");
         techAd.setTopicRelevance("electronics", 0.95);
         techAd.setTopicRelevance("technology", 0.9);
         techAd.setMoodRelevance(UserMood.CURIOUS, 0.8);
         techAd.setMoodRelevance(UserMood.EXCITED, 0.9);
-        techAd.setConversationalTemplate("Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱");
+        techAd.setConversationalTemplate("Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱 <a href='https://techcorp.com/latest-smartphone' target='_blank'>Learn More</a>");
         techAd.setType(AdType.PRODUCT_PROMOTION);
         adInventory.add(techAd);
 
@@ -175,11 +194,15 @@ public class AdMatchingEngine {
         travelAd.setCallToAction("Book Now");
         travelAd.addCategory("travel");
         travelAd.addKeyword("vacation");
+        travelAd.addKeyword("trip");
+        travelAd.addKeyword("travel");
         travelAd.addKeyword("destination");
+        travelAd.addKeyword("getaway");
+        travelAd.addKeyword("holiday");
         travelAd.setTopicRelevance("travel", 0.9);
         travelAd.setMoodRelevance(UserMood.EXCITED, 0.9);
         travelAd.setMoodRelevance(UserMood.HAPPY, 0.7);
-        travelAd.setConversationalTemplate("Dreaming of a vacation? I know the perfect place for your next adventure! ✈️");
+        travelAd.setConversationalTemplate("Dreaming of a vacation? I know the perfect place for your next adventure! ✈️ <a href='https://travelagency.com/dream-vacation' target='_blank'>Book Now</a>");
         travelAd.setType(AdType.SPECIAL_OFFER);
         adInventory.add(travelAd);
 
@@ -192,7 +215,7 @@ public class AdMatchingEngine {
         foodAd.setTopicRelevance("food", 0.9);
         foodAd.setMoodRelevance(UserMood.HAPPY, 0.6);
         foodAd.setMoodRelevance(UserMood.CURIOUS, 0.7);
-        foodAd.setConversationalTemplate("Love cooking? I've got some amazing recipes that'll make you look like a pro chef! 👨‍🍳");
+        foodAd.setConversationalTemplate("Love cooking? I've got some amazing recipes that'll make you look like a pro chef! 👨‍🍳 <a href='https://foodnetwork.com/delicious-recipes' target='_blank'>Get Recipes</a>");
         foodAd.setType(AdType.EDUCATIONAL);
         adInventory.add(foodAd);
 
@@ -207,7 +230,7 @@ public class AdMatchingEngine {
         fitnessAd.setTopicRelevance("health", 0.8);
         fitnessAd.setMoodRelevance(UserMood.EXCITED, 0.8);
         fitnessAd.setMoodRelevance(UserMood.CURIOUS, 0.6);
-        fitnessAd.setConversationalTemplate("Ready to crush your fitness goals? This program is a game-changer! 💪");
+        fitnessAd.setConversationalTemplate("Ready to crush your fitness goals? This program is a game-changer! 💪 <a href='https://fitlife.com/get-fit-fast' target='_blank'>Start Today</a>");
         fitnessAd.setType(AdType.PRODUCT_PROMOTION);
         adInventory.add(fitnessAd);
 
@@ -220,7 +243,7 @@ public class AdMatchingEngine {
         beautyAd.setTopicRelevance("beauty", 0.9);
         beautyAd.setMoodRelevance(UserMood.HAPPY, 0.7);
         beautyAd.setMoodRelevance(UserMood.CALM, 0.8);
-        beautyAd.setConversationalTemplate("Want that natural glow? This skincare line is absolutely magical! ✨");
+        beautyAd.setConversationalTemplate("Want that natural glow? This skincare line is absolutely magical! ✨ <a href='https://beautybrand.com/natural-skincare' target='_blank'>Shop Collection</a>");
         beautyAd.setType(AdType.BRAND_AWARENESS);
         adInventory.add(beautyAd);
 

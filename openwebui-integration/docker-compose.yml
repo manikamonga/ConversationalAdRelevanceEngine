@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  ad-relevance-integration:
+    build: .
+    ports:
+      - "3001:3001"
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - AD_ENGINE_HOST=ad-engine
+      - AD_ENGINE_PORT=8080
+    depends_on:
+      - ad-engine
+    restart: unless-stopped
+
+  ad-engine:
+    build: ../  # Build from the parent directory (Java project)
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Xmx2g
+    restart: unless-stopped
+
+  # Add your OpenWebUI service here if needed
+  # openwebui:
+  #   image: ghcr.io/open-webui/open-webui:main
+  #   ports:
+  #     - "3000:8080"
+  #   restart: unless-stopped

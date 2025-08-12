@@ -1,6 +1,6 @@
 # Context-Aware Conversational Ad Relevance Engine
 
-A **high-performance, low-latency** Java-based system that analyzes conversation context, detects user intent and mood, and dynamically suggests relevant advertisements in a natural, conversational manner. Perfect for integration with LLMs like Grok, ChatGPT, or any conversational AI platform.
+A **high-performance, low-latency** Java-based system that analyzes conversation context, detects user intent and mood, and dynamically suggests relevant advertisements in a natural, conversational manner. **Powered by OpenAI ChatGPT** for intelligent context analysis and ad suggestions.
 
 ## ⚡ Performance Highlights
 
@@ -14,18 +14,20 @@ A **high-performance, low-latency** Java-based system that analyzes conversation
 ## 🎯 Features
 
 ### Core Capabilities
-- **Context Analysis**: Analyzes ongoing conversations to detect intent, mood, and topics
+- **ChatGPT-Powered Analysis**: Uses OpenAI's GPT for intelligent context analysis and ad suggestions
+- **Dynamic Ad Generation**: Creates relevant ads based on conversation context instead of hardcoded inventory
 - **Smart Ad Matching**: Matches ads based on conversation context, user preferences, and relevance scoring
-- **Conversational Responses**: Generates natural, context-aware ad suggestions
+- **Conversational Responses**: Generates natural, context-aware ad suggestions with clickable links
 - **User State Management**: Tracks user preferences, interests, and interaction history
 - **Real-time Analytics**: Provides conversation analytics and engine statistics
 
 ### Advanced Features
-- **Mood Detection**: Identifies conversation mood (positive, excited, curious, frustrated, etc.)
-- **Intent Recognition**: Detects user intents (shopping, research, entertainment, travel, etc.)
-- **Topic Extraction**: Identifies relevant topics and assigns weights
+- **AI-Powered Mood Detection**: ChatGPT identifies conversation mood (positive, excited, curious, frustrated, etc.)
+- **Intelligent Intent Recognition**: Detects user intents (shopping, research, entertainment, travel, etc.) using natural language understanding
+- **Dynamic Topic Extraction**: Identifies relevant topics and assigns weights based on context
 - **Personalization**: Adapts responses based on user history and preferences
 - **Multi-turn Conversations**: Maintains context across conversation turns
+- **Robust Fallback System**: Graceful degradation to intelligent mock responses when ChatGPT API is unavailable
 
 ### Performance Features
 - **Intelligent Caching**: 30-second TTL with automatic cache invalidation
@@ -51,27 +53,24 @@ A **high-performance, low-latency** Java-based system that analyzes conversation
 graph TB
     %% External Inputs
     User[👤 User] --> |Message| LLM[🤖 LLM Platform]
-    LLM --> |Forward Message| Engine[🚀 ConversationalAdRelevanceEngine]
+    LLM --> |Forward Message| Engine[🚀 ChatGPTAdRelevanceEngine]
     
     %% Main Engine Components
     Engine --> Cache[💾 Intelligent Cache]
     Engine --> ContextMgr[📝 ConversationManager]
-    Engine --> ContextAnalyzer[🔍 ContextAnalyzer]
-    Engine --> AdMatcher[🎯 AdMatchingEngine]
-    Engine --> ResponseGen[💬 ResponseGenerator]
+    Engine --> ChatGPTService[🤖 ChatGPT Service]
+    Engine --> ResponseGen[💬 Response Generator]
+    
+    %% ChatGPT Integration
+    ChatGPTService --> |API Call| OpenAI[🔗 OpenAI API]
+    ChatGPTService --> |Fallback| MockResponse[🎭 Mock Response]
     
     %% Data Flow
     ContextMgr --> |Get/Update| Context[📊 ConversationContext]
     ContextMgr --> |Get/Update| UserState[👤 UserState]
     
-    ContextAnalyzer --> |Analyze| Context
-    ContextAnalyzer --> |Update| Context
-    
-    AdMatcher --> |Query| AdInventory[📦 Ad Inventory]
-    AdMatcher --> |Score| Context
-    AdMatcher --> |Score| UserState
-    
-    ResponseGen --> |Generate| AdSuggestion[💡 AdSuggestion]
+    ChatGPTService --> |Analyze| Context
+    ChatGPTService --> |Generate| AdSuggestion[💡 AdSuggestion]
     
     %% Performance Components
     Engine --> ThreadPool[⚡ Thread Pool]
@@ -87,11 +86,13 @@ graph TB
     classDef dataClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
     classDef perfClass fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
     classDef externalClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef aiClass fill:#fce4ec,stroke:#c2185b,stroke-width:2px
     
-    class Engine,ContextAnalyzer,AdMatcher,ResponseGen,ContextMgr engineClass
-    class Context,UserState,AdInventory,AdSuggestion dataClass
+    class Engine,ChatGPTService,ResponseGen,ContextMgr engineClass
+    class Context,UserState,AdSuggestion dataClass
     class Cache,ThreadPool,Metrics perfClass
     class User,LLM externalClass
+    class OpenAI,ChatGPTService aiClass
 ```
 
 ### Core Components
@@ -200,9 +201,16 @@ cd ConversationalAdRelevanceEngine
 mvn clean compile
 ```
 
-3. Run the backend demo:
+3. Configure ChatGPT API (optional):
 ```bash
-mvn exec:java -Dexec.mainClass="com.adrelevance.demo.ConversationalAdDemo"
+# Edit src/main/resources/application.properties
+# Add your OpenAI API key
+openai.api.key=your_openai_api_key_here
+```
+
+4. Run the ChatGPT-powered backend:
+```bash
+mvn exec:java -Dexec.mainClass="com.adrelevance.api.ChatGPTAdRelevanceAPI"
 ```
 
 ### Frontend Installation
@@ -221,11 +229,9 @@ npm start
 
 ### Running Both Together
 
-1. Start the Java backend (in one terminal):
+1. Start the ChatGPT-powered Java backend (in one terminal):
 ```bash
-mvn spring-boot:run  # If you have Spring Boot setup
-# OR run the demo
-mvn exec:java -Dexec.mainClass="com.adrelevance.demo.ConversationalAdDemo"
+mvn exec:java -Dexec.mainClass="com.adrelevance.api.ChatGPTAdRelevanceAPI"
 ```
 
 2. Start the React frontend (in another terminal):
@@ -258,28 +264,42 @@ npm start
 
 ## 📊 Demo Scenarios
 
-The demo showcases three conversation scenarios:
+The ChatGPT-powered demo showcases intelligent conversation analysis:
 
-### 1. Fashion Conversation
+### 1. Fashion & Style
 ```
-User: "I'm looking for some new summer clothes"
-User: "I love trendy styles and bright colors"
-Bot: "Hey! I noticed you're into style. Our new summer collection is absolutely stunning! 🌸"
-```
-
-### 2. Technology Conversation
-```
-User: "I need a new smartphone"
-User: "I'm researching the latest features"
-Bot: "Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱"
+User: "I need a new dress for summer"
+ChatGPT Analysis: Detects shopping intent, fashion category, excited mood
+Response: "Hey! I noticed you're into style. Our new summer collection is absolutely stunning! 🌸 <a href='https://fashionbrand.com/summer-collection' target='_blank'>Shop Now</a>"
 ```
 
-### 3. Travel Conversation
+### 2. Technology & Gadgets
 ```
-User: "I'm planning a vacation"
-User: "I want to go somewhere amazing"
-Bot: "Dreaming of a vacation? I know the perfect place for your next adventure! ✈️"
+User: "I want to buy a new smartphone"
+ChatGPT Analysis: Detects technology intent, shopping mood, tech category
+Response: "Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱 <a href='https://techcorp.com/latest-smartphone' target='_blank'>Learn More</a>"
 ```
+
+### 3. Travel & Adventure
+```
+User: "I'm planning a vacation to Europe"
+ChatGPT Analysis: Detects travel intent, excited mood, vacation planning
+Response: "Dreaming of a vacation? I know the perfect place for your next adventure! ✈️ <a href='https://travelagency.com/dream-vacation' target='_blank'>Book Now</a>"
+```
+
+### 4. No Relevant Ad Found
+```
+User: "What's the weather like today?"
+ChatGPT Analysis: No shopping intent detected, low confidence
+Response: "I don't have ad suggestions for this product right now. Try asking about technology, fashion, travel, food, fitness, or beauty products! 💡"
+```
+
+### Key Features:
+- **Intelligent Context Analysis**: ChatGPT understands conversation flow and user intent
+- **Dynamic Ad Generation**: Creates relevant ads based on context, not hardcoded inventory
+- **Clickable Links**: HTML links rendered as beautiful buttons in the UI
+- **Confidence Scoring**: Only shows ads when relevance confidence is high (>0.3)
+- **Graceful Fallback**: Intelligent responses when no relevant ads are found
 
 ## 🎨 Customization
 
@@ -429,53 +449,98 @@ mvn test -Dtest="*Test"
 
 ## 🤝 Integration
 
-### With LLMs (Grok, ChatGPT, etc.)
+### With ChatGPT Integration
 
 ```java
-// Example integration with an LLM
-public class LLMIntegration {
-    private ConversationalAdRelevanceEngine adEngine;
+// ChatGPT-powered ad relevance engine
+public class ChatGPTAdRelevanceEngine {
+    private ChatGPTService chatGPTService;
+    private ConversationManager conversationManager;
     
-    public String processWithLLM(String userMessage, String conversationId, String userId) {
-        // Process with your LLM first
-        String llmResponse = yourLLM.process(userMessage);
+    public CompletableFuture<AdSuggestion> processMessage(String conversationId, String userId, String message) {
+        // Get conversation context
+        ConversationContext context = getOrCreateConversationContext(conversationId, userId);
+        List<Message> conversationHistory = context.getMessages();
+        UserState userState = context.getUserState();
         
-        // Get relevant ad suggestion (async for better performance)
-        CompletableFuture<AdSuggestion> adFuture = adEngine.processMessageAsync(conversationId, userId, userMessage);
-        
-        // Combine LLM response with ad suggestion
-        return adFuture.thenApply(adSuggestion -> {
-            if (adSuggestion.getRelevanceScore() > 0.7) {
-                return llmResponse + "\n\n" + adSuggestion.getResponse();
+        // Use ChatGPT to analyze context and suggest ads
+        return chatGPTService.analyzeContextAndSuggestAd(
+            conversationId, userId, message, conversationHistory, userState
+        ).thenApply(chatGPTSuggestion -> {
+            if (chatGPTSuggestion.hasAd()) {
+                return new AdSuggestion(
+                    chatGPTSuggestion.getAd(),
+                    chatGPTSuggestion.getAd().getConversationalTemplate(),
+                    chatGPTSuggestion.getConfidence()
+                );
+            } else {
+                return new AdSuggestion(null, "I don't have ad suggestions for this product right now.", 0.0);
             }
-            return llmResponse;
-        }).join(); // Wait for completion
-    }
-    
-    // High-performance async version
-    public CompletableFuture<String> processWithLLMAsync(String userMessage, String conversationId, String userId) {
-        CompletableFuture<String> llmFuture = CompletableFuture.supplyAsync(() -> 
-            yourLLM.process(userMessage));
-        
-        CompletableFuture<AdSuggestion> adFuture = adEngine.processMessageAsync(conversationId, userId, userMessage);
-        
-        return CompletableFuture.allOf(llmFuture, adFuture)
-            .thenApply(v -> {
-                String llmResponse = llmFuture.join();
-                AdSuggestion adSuggestion = adFuture.join();
-                
-                if (adSuggestion.getRelevanceScore() > 0.7) {
-                    return llmResponse + "\n\n" + adSuggestion.getResponse();
-                }
-                return llmResponse;
-            });
+        });
     }
 }
 ```
 
+### ChatGPT API Configuration
+
+The system uses OpenAI's ChatGPT API for intelligent context analysis:
+
+```properties
+# OpenAI ChatGPT API Configuration
+openai.api.key=your_openai_api_key_here
+openai.api.url=https://api.openai.com/v1/chat/completions
+openai.model=gpt-3.5-turbo
+```
+
+### Features of ChatGPT Integration
+
+- **Intelligent Context Analysis**: ChatGPT analyzes conversation history, user state, and current message
+- **Dynamic Ad Generation**: Creates relevant ads based on context instead of hardcoded inventory
+- **Natural Language Understanding**: Understands user intent, mood, and interests
+- **Robust Fallback**: Graceful degradation to mock responses when API is unavailable
+- **High Performance**: Async processing with CompletableFuture for low latency
+- **Clickable Ad Links**: HTML links rendered as beautiful buttons in the UI
+
 ### REST API Integration
 
-The engine can be easily wrapped in a REST API for web/mobile integration.
+The ChatGPT-powered engine provides REST API endpoints:
+
+#### API Endpoints
+
+- `POST /api/chatgpt/process-message` - Process message and get ad suggestion
+- `POST /api/chatgpt/update-preferences` - Update user preferences
+- `GET /api/chatgpt/stats` - Get engine statistics
+- `GET /api/chatgpt/health` - Health check
+
+#### Example API Usage
+
+```bash
+# Process a message
+curl -X POST http://localhost:8080/api/chatgpt/process-message \
+  -H "Content-Type: application/json" \
+  -d '{
+    "conversationId": "conv123",
+    "userId": "user456",
+    "message": "I need a new smartphone"
+  }'
+
+# Response
+{
+  "conversationId": "conv123",
+  "message": "I need a new smartphone",
+  "userId": "user456",
+  "adSuggestion": {
+    "ad": {
+      "id": "chatgpt_1234567890",
+      "title": "Latest Smartphone",
+      "description": "Experience cutting-edge technology",
+      "conversationalTemplate": "Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱 <a href='https://techcorp.com/latest-smartphone' target='_blank'>Learn More</a>"
+    },
+    "response": "Speaking of tech, have you seen the latest smartphone? It's pretty amazing! 📱 <a href='https://techcorp.com/latest-smartphone' target='_blank'>Learn More</a>",
+    "relevanceScore": 0.8
+  }
+}
+```
 
 ### Frontend Integration
 

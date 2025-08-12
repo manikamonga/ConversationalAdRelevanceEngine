@@ -96,7 +96,7 @@ class AdEngineClient {
 
   async updateUserPreferences(userId, preferences) {
     try {
-      await axios.post(`${this.baseURL}/api/update-preferences`, {
+                      await axios.post(`${this.baseURL}/api/chatgpt/update-preferences`, {
         userId,
         ...preferences
       }, {
@@ -138,6 +138,11 @@ class SessionManager {
     this.sessions.set(sessionId, session);
     logger.info('Session created', { sessionId, userId });
     return session;
+  }
+
+  // Generate a new conversation ID for each message to avoid context pollution
+  getFreshConversationId(sessionId) {
+    return `conv_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
   getSession(sessionId) {
@@ -198,12 +203,15 @@ class AdSuggestionProcessor {
       }
     }
 
-    // Process with ad engine
+    // Process with ad engine using a fresh conversation ID to avoid context pollution
+    const freshConversationId = sessionManager.getFreshConversationId(sessionId);
     const result = await adEngine.processMessage(
-      session.conversationId,
+      freshConversationId,
       session.userId,
       message
     );
+
+
 
     if (result && result.adSuggestion && result.adSuggestion.relevanceScore >= config.adSettings.minRelevanceScore) {
       const suggestion = this.formatAdSuggestion(result.adSuggestion);
@@ -233,7 +241,9 @@ class AdSuggestionProcessor {
     }
 
     analytics.totalRequests++;
-    return null;
+    
+    // Return a friendly message when no relevant ads are found
+    return "I don't have ad suggestions for this product right now. Try asking about technology, fashion, travel, food, fitness, or beauty products! 💡";
   }
 
   formatAdSuggestion(adSuggestion) {
