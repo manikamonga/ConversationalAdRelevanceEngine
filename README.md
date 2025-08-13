@@ -92,7 +92,7 @@ openai.model=gpt-3.5-turbo
 
 ### 3. Start the Backend
 ```bash
-mvn -q -DskipTests spring-boot:run
+mvn spring-boot:run
 ```
 
 ### 4. Start OpenWebUI and the Ad Extension Server
