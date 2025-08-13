@@ -34,34 +34,34 @@ A sophisticated Java-based system that integrates ChatGPT for natural conversati
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
-        OWUI[OpenWebUI + Inline Ad Extension]
-    end
-    
-    subgraph "Integration Layer"
-        EXT[JS Extension Server (3002)]
-    end
-    
-    subgraph "Backend Layer"
-        API[ChatGPT API]
-        CE[ChatGPT Enhanced Engine]
-        CS[ChatGPT Service]
-        CM[Conversation Manager]
-    end
-    
-    subgraph "External Services"
-        OA[OpenAI API]
-    end
-    
-    OWUI --> EXT
-    EXT --> API
-    API --> CE
-    CE --> CS
-    CS --> OA
-    CE --> CM
-    
-    classDef aiClass fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
-    class CE,CS aiClass
+  subgraph Frontend["Frontend Layer"]
+    OWUI[OpenWebUI + Inline Ad Extension]
+  end
+
+  subgraph Extension["Extension Layer"]
+    EXT[JS Extension Server 3002]
+  end
+
+  subgraph Backend["Backend Layer"]
+    API[ChatGPT API]
+    CE[ChatGPT Enhanced Engine]
+    CS[ChatGPT Service]
+    CM[Conversation Manager]
+  end
+
+  subgraph External["External Services"]
+    OA[OpenAI API]
+  end
+
+  OWUI --> EXT
+  EXT --> API
+  API --> CE
+  CE --> CS
+  CS --> OA
+  CE --> CM
+
+  classDef aiClass fill:#ff6b6b,stroke:#333,stroke-width:2px,color:#fff
+  class CE,CS aiClass
 ```
 
 ## 🚀 Quick Start
