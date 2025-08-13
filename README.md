@@ -35,13 +35,11 @@ A sophisticated Java-based system that integrates ChatGPT for natural conversati
 ```mermaid
 graph TB
     subgraph "Frontend Layer"
-        UI[Demo UI]
-        OWUI[OpenWebUI Integration]
+        OWUI[OpenWebUI + Inline Ad Extension]
     end
     
     subgraph "Integration Layer"
-        IS[Integration Server]
-        WS[WebSocket Server]
+        EXT[JS Extension Server (3002)]
     end
     
     subgraph "Backend Layer"
@@ -55,9 +53,8 @@ graph TB
         OA[OpenAI API]
     end
     
-    UI --> IS
-    OWUI --> IS
-    IS --> API
+    OWUI --> EXT
+    EXT --> API
     API --> CE
     CE --> CS
     CS --> OA
