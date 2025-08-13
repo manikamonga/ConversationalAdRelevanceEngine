@@ -16,7 +16,7 @@ A sophisticated Java-based system that integrates ChatGPT for natural conversati
 - **Contextual Relevance**: Suggests ads based on conversation topics
 - **Intent Detection**: Analyzes user intent (shopping, travel, tech, etc.)
 - **Mood Analysis**: Considers user mood for personalized suggestions
-- **Clickable Links**: Ad suggestions include clickable HTML buttons
+- **Inline Sponsored Link**: One-line ad with a grey “Sponsored” pill + clickable link (no banner)
 
 ### ⚡ **Performance & Scalability**
 - **Low Latency**: Optimized for real-time conversations
@@ -26,8 +26,8 @@ A sophisticated Java-based system that integrates ChatGPT for natural conversati
 
 ### 🔧 **Integration Ready**
 - **REST API**: Full REST API for easy integration
-- **OpenWebUI Support**: Ready-to-use OpenWebUI integration
-- **Demo Interface**: Live demo page for testing
+- **OpenWebUI Extension**: Drop-in JS extension that observes chats and injects inline sponsored links
+- **Zero Mocking**: Uses real ChatGPT only
 - **Docker Support**: Containerized deployment options
 
 ## 🏗️ Architecture
@@ -92,26 +92,35 @@ openai.model=gpt-3.5-turbo
 
 ### 3. Start the Backend
 ```bash
-mvn clean compile
-mvn exec:java -Dexec.mainClass="com.adrelevance.api.ChatGPTAdRelevanceAPI"
+mvn -q -DskipTests spring-boot:run
 ```
 
-### 4. Start the Integration Server
+### 4. Start OpenWebUI and the Ad Extension Server
 ```bash
+# Terminal A: OpenWebUI
+open-webui serve --port 3000 | cat
+
+# Terminal B: Ad Extension Server (serves the JS extension)
 cd openwebui-integration
-npm install
-node server.js
+node serve-extension.js
 ```
 
-### 5. Access the Demo
-Open `http://localhost:3001` in your browser
+### 5. Load the Extension in OpenWebUI (Browser Console)
+Open `http://localhost:3000`, then run:
+```javascript
+fetch('http://localhost:3002/openwebui-ad-extension.js')
+  .then(r => r.text())
+  .then(code => { eval(code); window._ads = new OpenWebUIAdExtension(); });
+```
+
+Now ask a commercial question (e.g., “best running shoes under $100”). You’ll see a single-line inline ad with a grey Sponsored pill and a clickable link.
 
 ## 🎯 Demo Scenarios
 
 ### **Conversational AI Response**
 ```
-User: "Hello, how are you today?"
-ChatGPT: "Hello! I'm here and ready to chat. How are you feeling today?"
+User: "hello"
+ChatGPT: "How can I help ?"
 ```
 
 ### **Travel with Ad Suggestion**
@@ -122,8 +131,9 @@ ChatGPT: "That sounds like an amazing trip! London is such a vibrant city with s
 
 ### **Shopping with Ad Suggestion**
 ```
-User: "I need a new dress for a party"
-ChatGPT: "How exciting! Finding the perfect dress for a party can be so much fun. Do you have a specific style or color in mind? [Shop Party Dresses]"
+User: "I need a new laptop under $1200"
+ChatGPT: "I can help with that!"  
+UI: Shows inline ad — [Sponsored] Check out the latest laptops under $1200 → opens in new tab
 ```
 
 ### **General Conversation**
@@ -190,18 +200,11 @@ GET /api/chatgpt/health
 
 ## 🛠️ Integration Examples
 
-### OpenWebUI Integration
-```javascript
-const client = new AdRelevanceClient({
-  baseURL: 'http://localhost:3001'
-});
-
-// Process message for ad suggestions
-const adSuggestion = await client.processMessage("I need a new smartphone");
-if (adSuggestion) {
-  console.log("Ad suggestion:", adSuggestion);
-}
-```
+### OpenWebUI Integration (via JS Extension)
+1) Start backend (8080)
+2) Start OpenWebUI (3000)
+3) Start extension server (3002)
+4) Load the extension (browser console snippet above)
 
 ### Direct API Integration
 ```bash
@@ -219,7 +222,7 @@ curl -X POST http://localhost:8080/api/chatgpt/process-message \
 ### ChatGPT Settings
 ```properties
 # OpenAI Configuration
-openai.api.key=your-api-key
+openai.api.key=your-openai-api-key-here
 openai.api.url=https://api.openai.com/v1/chat/completions
 openai.model=gpt-3.5-turbo
 
@@ -257,7 +260,7 @@ logging.level.com.adrelevance=DEBUG
 
 ## 🔒 Security
 
-- **API Key Protection**: Never commit API keys to version control
+- **API Key Protection**: Never commit API keys to version control (history is scrubbed via rewrite if needed)
 - **Input Validation**: All user inputs are validated and sanitized
 - **Rate Limiting**: Built-in rate limiting for API protection
 - **Error Handling**: Graceful error handling without exposing sensitive data
