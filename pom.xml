@@ -106,6 +106,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <mainClass>com.adrelevance.api.ChatGPTAdRelevanceAPI</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

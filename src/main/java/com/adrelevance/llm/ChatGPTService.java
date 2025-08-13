@@ -109,7 +109,7 @@ public class ChatGPTService {
      */
     private String createAdSuggestionPrompt(String currentMessage, String conversationContext) {
         return String.format("""
-            You are a friendly, conversational AI assistant that can help users with various topics while occasionally suggesting relevant, contextual ads when appropriate.
+            You are a friendly, conversational AI assistant that responds naturally to users and ONLY suggests ads when there's clear commercial intent.
             
             %s
             
@@ -117,7 +117,7 @@ public class ChatGPTService {
             
             Your task is to:
             1. Respond naturally to the user's message as a conversational AI
-            2. If the user mentions shopping, travel, technology, fashion, food, or any product/service need, include an ad_suggestion
+            2. Include an ad_suggestion when the user mentions buying, shopping, or specific products/services
             3. Keep the conversation engaging and human-like
             4. Always be helpful and friendly
             
@@ -139,10 +139,14 @@ public class ChatGPTService {
                 "relevance_reasoning": "Brief explanation of why this ad is relevant"
             }
             
-            Guidelines:
+            CRITICAL GUIDELINES:
             - Always provide a conversational_response
             - Be friendly, helpful, and engaging in your responses
-            - If user mentions shopping, travel, technology, fashion, food, or any product need, include ad_suggestion
+            - Include ad_suggestion when user mentions buying, shopping, or specific products/services
+            - For greetings, casual conversation, general questions - respond WITHOUT any ad
+            - For "hello", "hi", "how are you", and similar greetings: set conversational_response EXACTLY to "How can I help ?" (no additional text)
+            - For "what's the weather", etc. - NO ad, just conversational response
+            - confidence should be 0.0 for non-commercial messages, 0.6-1.0 for commercial intent
             - Make ad suggestions feel natural and helpful, not pushy
             - Keep responses conversational and natural
             - Consider user interests and mood when making suggestions
@@ -244,7 +248,8 @@ public class ChatGPTService {
                 return "shopping";
             }
             if (message.contains("phone") || message.contains("smartphone") || message.contains("tech") || 
-                message.contains("gadget") || message.contains("device")) {
+                message.contains("gadget") || message.contains("device") || message.contains("laptop") ||
+                message.contains("computer") || message.contains("pc") || message.contains("macbook")) {
                 return "technology";
             }
             if (message.contains("hotel") || message.contains("accommodation") || message.contains("stay") || 
@@ -452,8 +457,9 @@ public class ChatGPTService {
             // Extract ad suggestion if present
             JsonNode adNode = suggestionNode.path("ad_suggestion");
             Ad ad = null;
+            logger.info("ChatGPT raw response - ad_suggestion present: {}, confidence: {}", !adNode.isMissingNode(), confidence);
             
-            if (!adNode.isMissingNode() && confidence >= 0.3) {
+            if (!adNode.isMissingNode() && confidence >= 0.6) {
                 ad = new Ad(
                     "chatgpt_" + System.currentTimeMillis(),
                     adNode.path("title").asText(),
@@ -469,94 +475,69 @@ public class ChatGPTService {
                 String title = adNode.path("title").asText();
                 String description = adNode.path("description").asText();
                 
-                String sponsoredBanner = String.format("""
-                    <div class="sponsored-banner" style="
-                        background: linear-gradient(135deg, #667eea 0%%, #764ba2 100%%);
-                        border: 1px solid #e2e8f0;
-                        border-radius: 12px;
-                        padding: 16px;
-                        margin: 12px 0;
-                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                        position: relative;
-                        overflow: hidden;
+                String sponsoredLink = String.format("""
+                    <div class="sponsored-link" style="
+                        border-left: 1px solid #3b82f6;
+                        background: #f8fafc;
+                        padding: 4px 6px;
+                        margin: 2px 0;
+                        border-radius: 2px;
+                        font-size: 11px;
                     ">
                         <div style="
-                            position: absolute;
-                            top: 8px;
-                            right: 8px;
-                            background: rgba(255, 255, 255, 0.2);
-                            color: white;
-                            padding: 2px 8px;
-                            border-radius: 12px;
-                            font-size: 10px;
-                            font-weight: 600;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                        ">Sponsored</div>
-                        
-                        <div style="
                             display: flex;
+                            justify-content: space-between;
                             align-items: center;
-                            gap: 12px;
-                            margin-bottom: 8px;
+                            gap: 4px;
                         ">
-                            <div style="
-                                width: 40px;
-                                height: 40px;
-                                background: rgba(255, 255, 255, 0.2);
-                                border-radius: 8px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 18px;
-                            ">💡</div>
-                            <div>
-                                <h4 style="
-                                    margin: 0 0 4px 0;
-                                    color: white;
-                                    font-size: 16px;
+                            <div style="flex: 1;">
+                                <div style="
+                                    font-size: 8px;
+                                    color: #6b7280;
+                                    text-transform: uppercase;
                                     font-weight: 600;
-                                ">%s</h4>
-                                <p style="
-                                    margin: 0;
-                                    color: rgba(255, 255, 255, 0.9);
-                                    font-size: 14px;
-                                    line-height: 1.4;
-                                ">%s</p>
+                                    margin-bottom: 1px;
+                                ">Sponsored</div>
+                                <a href="%s" target="_blank" style="
+                                    color: #1f2937;
+                                    text-decoration: none;
+                                    font-weight: 600;
+                                    font-size: 11px;
+                                    line-height: 1.1;
+                                " onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#1f2937'">%s</a>
+                                <div style="
+                                    color: #6b7280;
+                                    font-size: 9px;
+                                    line-height: 1.1;
+                                    margin-top: 1px;
+                                ">%s</div>
                             </div>
+                            <div style="
+                                background: #3b82f6;
+                                color: white;
+                                padding: 2px 4px;
+                                border-radius: 2px;
+                                font-size: 8px;
+                                font-weight: 600;
+                                white-space: nowrap;
+                            ">%s</div>
                         </div>
-                        
-                        <a href="%s" target="_blank" style="
-                            display: inline-block;
-                            background: rgba(255, 255, 255, 0.2);
-                            color: white;
-                            padding: 8px 16px;
-                            border-radius: 6px;
-                            text-decoration: none;
-                            font-weight: 600;
-                            font-size: 14px;
-                            transition: all 0.2s;
-                            border: 1px solid rgba(255, 255, 255, 0.3);
-                        " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">%s</a>
                     </div>
-                    """, title, description, url, callToAction);
+                    """, url, title, description, callToAction);
                 
-                String template = String.format("%s %s", conversationalResponse, sponsoredBanner);
+                String template = String.format("%s %s", conversationalResponse, sponsoredLink);
                 ad.setConversationalTemplate(template);
             } else {
-                // No ad, but still provide conversational response
-                ad = new Ad(
-                    "chatgpt_" + System.currentTimeMillis(),
-                    "Conversational Response",
-                    "AI Assistant Response",
-                    "ChatGPT"
-                );
-                ad.addCategory("conversation");
-                ad.setCallToAction("");
-                ad.setConversationalTemplate(conversationalResponse);
+                // No ad suggestion - don't create an Ad object
+                ad = null;
             }
             
-            return new ChatGPTAdSuggestion(originalMessage, ad, confidence, conversationalResponse);
+            // For non-commercial messages, set confidence to 0.0 to prevent ad display
+            boolean hasAdSuggestion = !adNode.isMissingNode();
+            double finalConfidence = (hasAdSuggestion && confidence >= 0.6) ? confidence : 0.0;
+            logger.info("ChatGPT Response - Original confidence: {}, has ad suggestion: {}, ad is null: {}, final confidence: {}", 
+                       confidence, hasAdSuggestion, (ad == null), finalConfidence);
+            return new ChatGPTAdSuggestion(originalMessage, ad, finalConfidence, conversationalResponse);
             
         } catch (Exception e) {
             logger.error("Error parsing ChatGPT response: {}", e.getMessage(), e);
@@ -580,11 +561,13 @@ public class ChatGPTService {
             this.ad = ad;
             this.confidence = confidence;
             this.reasoning = reasoning;
+            logger.info("ChatGPTAdSuggestion created - confidence: {}, ad null: {}", confidence, (ad == null));
         }
         
         public String getOriginalMessage() { return originalMessage; }
         public Ad getAd() { return ad; }
         public double getConfidence() { return confidence; }
+        public double getRelevanceScore() { return confidence; } // Alias for API compatibility
         public String getReasoning() { return reasoning; }
         public boolean hasAd() { return ad != null && confidence >= 0.3; }
     }

@@ -51,7 +51,7 @@ public class ChatGPTAdRelevanceAPI {
                 response.put("message", message);
                 response.put("userId", userId);
                 
-                if (adSuggestion != null && adSuggestion.getAd() != null) {
+                if (adSuggestion != null && adSuggestion.getAd() != null && adSuggestion.getRelevanceScore() > 0.0) {
                     Map<String, Object> adSuggestionMap = new HashMap<>();
                     adSuggestionMap.put("ad", convertAdToMap(adSuggestion.getAd()));
                     adSuggestionMap.put("response", adSuggestion.getResponse());
@@ -120,6 +120,9 @@ public class ChatGPTAdRelevanceAPI {
      * Convert Ad object to Map for JSON serialization
      */
     private Map<String, Object> convertAdToMap(com.adrelevance.model.Ad ad) {
+        if (ad == null) {
+            return null;
+        }
         Map<String, Object> adMap = new HashMap<>();
         adMap.put("id", ad.getId());
         adMap.put("title", ad.getTitle());

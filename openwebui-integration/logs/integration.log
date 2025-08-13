@@ -228,3 +228,4 @@
 {"conversationId":"conv_1755040274284_4jqlb2s02","hasAdSuggestion":true,"level":"info","message":"Ad engine response","responseTime":1690,"service":"openwebui-ad-integration","timestamp":"2025-08-12T23:11:15.975Z","userId":"test_user"}
 {"adSuggestionKeys":["ad","relevanceScore","response"],"hasAdSuggestion":true,"hasResult":true,"level":"info","message":"Ad engine result","minScore":0.1,"relevanceScore":0.9,"resultKeys":["conversationId","message","adSuggestion","userId"],"service":"openwebui-ad-integration","sessionId":"test_ui_sponsored","timestamp":"2025-08-12T23:11:15.977Z"}
 {"adTitle":"Get Ready for the Party!","level":"info","message":"Ad suggestion generated","relevanceScore":0.9,"service":"openwebui-ad-integration","sessionId":"test_ui_sponsored","timestamp":"2025-08-12T23:11:15.978Z"}
+{"level":"info","message":"SIGTERM received, shutting down gracefully","service":"openwebui-ad-integration","timestamp":"2025-08-12T23:20:51.070Z"}

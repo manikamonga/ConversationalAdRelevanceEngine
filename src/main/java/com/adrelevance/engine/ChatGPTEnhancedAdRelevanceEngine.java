@@ -128,7 +128,10 @@ public class ChatGPTEnhancedAdRelevanceEngine {
      * Gets or creates a conversation context
      */
     private ConversationContext getOrCreateConversationContext(String conversationId, String userId) {
-        return conversationCache.computeIfAbsent(conversationId, id -> {
+        // Handle null conversationId by generating a default one
+        String safeConversationId = conversationId != null ? conversationId : "default_" + userId + "_" + System.currentTimeMillis();
+        
+        return conversationCache.computeIfAbsent(safeConversationId, id -> {
             ConversationContext context = new ConversationContext(id, userId);
             context.setUserState(conversationManager.getOrCreateUserState(userId));
             return context;
